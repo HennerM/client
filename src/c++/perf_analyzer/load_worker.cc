@@ -86,6 +86,7 @@ LoadWorker::CreateContext()
 {
   auto ctx = CreateInferContext();
   ctx->Init();
+  ctx->RegisterAsyncManagerCallback(async_manager_callback_);
   CreateContextFinalize(ctx);
   ctxs_.push_back(ctx);
 }

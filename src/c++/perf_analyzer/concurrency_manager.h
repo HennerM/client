@@ -95,7 +95,6 @@ class ConcurrencyManager : public LoadManager {
       std::shared_ptr<ThreadStat>,
       std::shared_ptr<ConcurrencyWorker::ThreadConfig>);
 
- private:
   ConcurrencyManager(
       const bool async, const bool streaming, const int32_t batch_size,
       const size_t max_threads, const size_t max_concurrency,
@@ -103,6 +102,7 @@ class ConcurrencyManager : public LoadManager {
       const std::shared_ptr<ModelParser>& parser,
       const std::shared_ptr<cb::ClientBackendFactory>& factory);
 
+ private:
   void InitManagerFinalize() override;
 
   // Pause all worker threads that are working on sequences

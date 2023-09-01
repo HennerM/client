@@ -169,6 +169,8 @@ class LoadManager {
       const double sequence_length_variation, const bool using_json_data,
       std::shared_ptr<DataLoader> data_loader);
 
+  std::function<void(uint32_t)> async_manager_callback_{nullptr};
+
 #ifndef DOCTEST_CONFIG_DISABLE
   friend NaggyMockLoadManager;
 

@@ -91,7 +91,15 @@ class ConcurrencyWorker : public LoadWorker {
   {
   }
 
-  void Infer() override;
+  virtual void Infer() override;
+
+ protected:
+  void RunInference();
+
+  void CreateCtxIdTracker();
+
+  // Reserve vector size for contexts
+  void ReserveContexts();
 
  private:
   const size_t max_concurrency_;
@@ -100,11 +108,6 @@ class ConcurrencyWorker : public LoadWorker {
   size_t& active_threads_;
 
   std::shared_ptr<ThreadConfig> thread_config_;
-
-  void CreateCtxIdTracker();
-
-  // Reserve vector size for contexts
-  void ReserveContexts();
 
   // Handle the case where execute_ is false
   void HandleExecuteOff();

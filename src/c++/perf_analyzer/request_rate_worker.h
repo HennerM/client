@@ -129,6 +129,7 @@ class RequestRateWorker : public LoadWorker, public IScheduler {
     ctx->SetNumActiveThreads(num_threads_);
   }
 
+
 #ifndef DOCTEST_CONFIG_DISABLE
   friend NaggyMockRequestRateWorker;
   friend TestCustomLoadManager;

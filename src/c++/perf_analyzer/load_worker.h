@@ -67,6 +67,12 @@ class LoadWorker : public IWorker {
 
   virtual ~LoadWorker() = default;
 
+ public:
+  void RegisterAsyncManagerCallback(std::function<void(uint32_t)> callback)
+  {
+    async_manager_callback_ = callback;
+  }
+
  protected:
   // Return the total number of async requests that have started and not
   // finished
@@ -99,6 +105,7 @@ class LoadWorker : public IWorker {
 
   // Any code that needs to execute after the Context has been created
   virtual void CreateContextFinalize(std::shared_ptr<InferContext> ctx) = 0;
+
 
   // Detect the cases where this thread needs to exit
   bool ShouldExit();
@@ -142,6 +149,7 @@ class LoadWorker : public IWorker {
   const std::shared_ptr<ModelParser> parser_;
   const std::shared_ptr<cb::ClientBackendFactory> factory_;
   const std::shared_ptr<IInferDataManager> infer_data_manager_;
+  std::function<void(uint32_t)> async_manager_callback_{nullptr};
 
   const bool on_sequence_model_;
   const bool async_;

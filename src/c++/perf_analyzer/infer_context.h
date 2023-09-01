@@ -122,6 +122,11 @@ class InferContext {
     async_callback_finalize_func_ = callback;
   }
 
+  void RegisterAsyncManagerCallback(std::function<void(uint32_t)> callback)
+  {
+    async_manager_callback_ = callback;
+  }
+
   // TODO REFACTOR TMA-1043 this should be in memory class
   void SetNumActiveThreads(size_t num_threads)
   {
@@ -191,6 +196,8 @@ class InferContext {
   std::reference_wrapper<const bool> execute_{execute_placeholder_};
 
   std::shared_ptr<SequenceManager> sequence_manager_{nullptr};
+  std::function<void(uint32_t)> async_manager_callback_{nullptr};
+  size_t num_responses_{0};
 
 #ifndef DOCTEST_CONFIG_DISABLE
   friend NaggyMockInferContext;

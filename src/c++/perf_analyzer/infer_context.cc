@@ -279,6 +279,8 @@ InferContext::AsyncCallbackFuncImpl(cb::InferResult* result)
     }
   }
 
+  async_manager_callback_(++num_responses_);
+
   if (is_final_response) {
     total_ongoing_requests_--;
 
